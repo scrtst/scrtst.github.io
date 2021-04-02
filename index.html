@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Triangle</title>
+</head>
+<body>
+<p>Треугольник функции принимает три числа a, b, c, которые являются длиной сторон треугольника; вычисляет, является ли треугольник равносторонним, равнобедренным или разносторонним.<br />
+&nbsp;</p>
+
+<form method="get" name="formMain">
+<table border="0" cellpadding="1" cellspacing="1" style="width:500px">
+	<caption><strong>Задайте стороны треугольника</strong></caption>
+	<tbody>
+		<tr>
+			<td style="text-align:right">Сторона А</td>
+			<td><input type="text" id="input_a"/></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Сторона В</td>
+			<td><input type="text" id="input_b"/></td>
+		</tr>
+		<tr>
+			<td style="text-align:right">Сторона С</td>
+			<td><input type="text" id="input_c"/></td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="button" value="Ok" id="btn_ok" onclick="get_result();"/></td>
+		</tr>
+		<tr >
+			<td colspan = 2></td>
+		</tr>
+		<tr >
+			<td id="txt_result" colspan = 2></td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+</form>
+<script type="text/javascript">
+	function get_result(){
+    	var result = null;
+     	var re = /^(?!0[0-9])[0-9]*$/gm;
+
+		try{
+    	var a = document.getElementById("input_a").value;
+    	var b = document.getElementById("input_b").value;
+    	var c = document.getElementById("input_c").value;
+
+		if (0 === a.length && 0 === b.length && 0 === c.length)
+			result = 'Все поля пустые. Введите значения в соотвествующие поля';
+		else if	(0 === a.length || 0 === b.length)
+			result = 'Не все поля заданы';
+		else if (!a.match(re) || !b.match(re) || !c.match(re) )
+			result = 'Некорректные значения. Введите значения в соотвествующие поля';
+		else
+			result = (c > a + b || a > b + c || b > c + a) ? 'Не треугольник' : (a==b && b==c && a==c) ? 'Равносторонний треугольник' : (a==b || b==c || a==c) ? 'Равнобедренный треугольник' : 'Разносторонний';
+			error = false
+		} catch (e) {
+			result='Неизвестная ошибка ...'
+		}
+
+        var text = document.getElementById("txt_result");
+
+        text.innerHTML = result;
+
+        }
+</script>
+</body>
+</html>
